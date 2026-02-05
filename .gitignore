@@ -1,0 +1,16 @@
+.env
+.venv/
+__pycache__/
+*.pyc
+.DS_Store
+data/images/
+data/raw/
+data/processed/
+data/index_text/
+data/index_image/
+data/uploads/
+tmp/
+*.npy
+*.parquet
+*.gz
+*.index
