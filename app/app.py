@@ -39,7 +39,8 @@ IMG_META_PATH = IMG_DIR / "meta.parquet"
 LOCAL_IMAGES_DIR = BASE_DIR / "data" / "images"
 
 # Stable embedder (Python 3.11) for arbitrary uploaded images
-PY311 = BASE_DIR / ".venv311" / "bin" / "python"
+import sys
+PY311 = sys.executable
 EMBED_SCRIPT = BASE_DIR / "tools" / "embed_one_image.py"
 
 # ✅ Fix: your repo has tools/blip_caption_one.py
