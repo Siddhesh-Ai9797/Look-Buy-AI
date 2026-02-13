@@ -93,8 +93,9 @@ def ensure_files():
         st.stop()
 
     # If you want upload-image embedding:
-    if not PY311.exists():
-        st.warning(f"Missing Python 3.11 env at: {PY311}\nUploaded-image embedding will be disabled.")
+    if not Path(PY311).exists():
+    st.warning(f"Python executable not found at: {PY311}\nUploaded-image embedding will be disabled.")
+
     if not EMBED_SCRIPT.exists():
         st.warning(f"Missing embed script at: {EMBED_SCRIPT}\nUploaded-image embedding will be disabled.")
 
