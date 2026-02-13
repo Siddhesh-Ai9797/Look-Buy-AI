@@ -1,0 +1,12 @@
+streamlit
+faiss-cpu
+sentence-transformers
+transformers
+torch
+torchvision
+numpy
+pandas
+pillow
+requests
+openai
+huggingface-hub
