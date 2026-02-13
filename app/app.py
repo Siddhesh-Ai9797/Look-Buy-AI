@@ -92,16 +92,18 @@ def ensure_files():
         st.error("Missing required index files:\n\n" + "\n".join(missing))
         st.stop()
 
-    # If you want upload-image embedding:
+    # Uploaded image embedding checks
+    from pathlib import Path
     if not Path(PY311).exists():
-    st.warning(f"Python executable not found at: {PY311}\nUploaded-image embedding will be disabled.")
+        st.warning(f"Python executable not found at: {PY311}\nUploaded-image embedding will be disabled.")
 
     if not EMBED_SCRIPT.exists():
         st.warning(f"Missing embed script at: {EMBED_SCRIPT}\nUploaded-image embedding will be disabled.")
 
-    # Caption is optional
+    # Caption optional
     if not BLIP_SCRIPT.exists():
         st.warning(f"BLIP caption script not found at: {BLIP_SCRIPT}. Auto-caption will be disabled.")
+
 
 @st.cache_resource
 def load_text_model():
