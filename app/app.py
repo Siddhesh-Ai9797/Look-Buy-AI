@@ -128,11 +128,26 @@ def embed_uploaded_image(img_path: Path) -> Optional[np.ndarray]:
 def caption_uploaded_image(img_path: Path) -> Optional[str]:
     if not BLIP_SCRIPT.exists():
         return None
-    cmd = [str(PY311), str(BLIP_SCRIPT), str(img_path), str(TMP_CAPTION)]
+    try:
+        res = subprocess.run(
+            [str(PY311), str(BLIP_SCRIPT), str(img_path), str(TMP_CAPTION)],
+            check=True,
+            capture_output=True,
+            text=True,
+        )
+    except subprocess.CalledProcessError as e:
+        err = (e.stderr or e.stdout or "").strip()
+        st.warning("Auto-caption failed; continuing without caption.\n\n" + (err[-1200:] if err else ""))
+        return None
+    except Exception as e:
+        st.warning(f"Auto-caption crashed: {e}")
+        return None
 
-    subprocess.run(cmd, check=True)
+    if not TMP_CAPTION.exists():
+        return None
     txt = TMP_CAPTION.read_text(encoding="utf-8").strip()
     return txt or None
+
 
 def embed_text(model: SentenceTransformer, query: str) -> np.ndarray:
     vec = model.encode([query], normalize_embeddings=True)
