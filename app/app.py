@@ -125,7 +125,8 @@ def embed_uploaded_image(img_path: Path) -> Optional[np.ndarray]:
 def caption_uploaded_image(img_path: Path) -> Optional[str]:
     if not BLIP_SCRIPT.exists():
         return None
-    cmd = ["python", str(BLIP_SCRIPT), str(img_path), str(TMP_CAPTION)]
+    cmd = [str(PY311), str(BLIP_SCRIPT), str(img_path), str(TMP_CAPTION)]
+
     subprocess.run(cmd, check=True)
     txt = TMP_CAPTION.read_text(encoding="utf-8").strip()
     return txt or None
