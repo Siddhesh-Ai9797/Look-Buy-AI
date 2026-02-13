@@ -10,3 +10,5 @@ pillow
 requests
 openai
 huggingface-hub
+open-clip-torch
+pyarrow
