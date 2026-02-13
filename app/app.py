@@ -38,10 +38,11 @@ IMG_META_PATH = IMG_DIR / "meta.parquet"
 
 LOCAL_IMAGES_DIR = BASE_DIR / "data" / "images"
 
-# Stable embedder (Python 3.11) for arbitrary uploaded images
+# Stable embedder (use current Python on Streamlit Cloud / EC2)
 import sys
-PY311 = sys.executable
+PY311 = Path(sys.executable)   # ✅ make it a Path so .exists() works
 EMBED_SCRIPT = BASE_DIR / "tools" / "embed_one_image.py"
+
 
 # ✅ Fix: your repo has tools/blip_caption_one.py
 BLIP_SCRIPT = BASE_DIR / "tools" / "blip_caption_one.py"
